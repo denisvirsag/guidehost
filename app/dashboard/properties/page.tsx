@@ -1,12 +1,11 @@
-import { createClient } from '@/lib/supabase/server'
+import { createClient, getUser } from '@/lib/supabase/server'
 import PropertiesClient from '@/components/dashboard/PropertiesClient'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = { title: 'Proprietà' }
 
 export default async function PropertiesPage() {
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const [user, supabase] = await Promise.all([getUser(), createClient()])
 
   const { data: properties } = await supabase
     .from('properties')

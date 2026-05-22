@@ -1,12 +1,11 @@
-import { createClient } from '@/lib/supabase/server'
+import { createClient, getUser } from '@/lib/supabase/server'
 import GuidesClient from '@/components/dashboard/GuidesClient'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = { title: 'Guide' }
 
 export default async function GuidesPage() {
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const [user, supabase] = await Promise.all([getUser(), createClient()])
 
   const { data: guides } = await supabase
     .from('guides')

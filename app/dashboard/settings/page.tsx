@@ -1,15 +1,14 @@
-import { createClient } from '@/lib/supabase/server'
+import { createClient, getUser } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
-import { CreditCard, User, ArrowRight, LogOut } from 'lucide-react'
+import { CreditCard, ArrowRight, LogOut } from 'lucide-react'
 import { logout } from '@/app/actions/auth'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = { title: 'Impostazioni' }
 
 export default async function SettingsPage() {
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const [user, supabase] = await Promise.all([getUser(), createClient()])
   if (!user) redirect('/login')
 
   const { data: profile } = await supabase

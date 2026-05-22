@@ -1,4 +1,4 @@
-import { createClient } from '@/lib/supabase/server'
+import { createClient, getUser } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import DashboardLayoutWrapper from '@/components/dashboard/DashboardLayoutWrapper'
 import type { Metadata } from 'next'
@@ -15,11 +15,8 @@ export default async function DashboardLayout({
 }: {
   children: React.ReactNode
 }) {
-  const supabase = await createClient()
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
+  // Use cached getUser — shared with middleware, no extra round-trip
+  const [user, supabase] = await Promise.all([getUser(), createClient()])
 
   if (!user) {
     redirect('/login')

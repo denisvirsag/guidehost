@@ -1,12 +1,11 @@
-import { createClient } from '@/lib/supabase/server'
+import { createClient, getUser } from '@/lib/supabase/server'
 import QrCodesClient from '@/components/dashboard/QrCodesClient'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = { title: 'QR Code' }
 
 export default async function QrCodesPage() {
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const [user, supabase] = await Promise.all([getUser(), createClient()])
 
   const { data: guides } = await supabase
     .from('guides')

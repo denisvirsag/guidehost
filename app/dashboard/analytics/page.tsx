@@ -1,4 +1,4 @@
-import { createClient } from '@/lib/supabase/server'
+import { createClient, getUser } from '@/lib/supabase/server'
 import Link from 'next/link'
 import { TrendingUp, Eye } from 'lucide-react'
 import type { Metadata } from 'next'
@@ -6,8 +6,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = { title: 'Analytics' }
 
 export default async function AnalyticsPage() {
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const [user, supabase] = await Promise.all([getUser(), createClient()])
 
   const { data: profile } = await supabase
     .from('profiles')
