@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { QrCode, Download, ExternalLink } from 'lucide-react'
+import { motion } from 'framer-motion'
 
 interface Property {
   name: string
@@ -22,7 +23,12 @@ interface QrCodesClientProps {
 
 export default function QrCodesClient({ guides, appUrl }: QrCodesClientProps) {
   return (
-    <div className="space-y-6 max-w-5xl mx-auto">
+    <motion.div
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+      className="space-y-6 max-w-5xl mx-auto"
+    >
       {/* Header */}
       <div className="flex flex-col gap-1">
         <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
@@ -123,6 +129,6 @@ export default function QrCodesClient({ guides, appUrl }: QrCodesClientProps) {
           </Link>
         </div>
       )}
-    </div>
+    </motion.div>
   )
 }
