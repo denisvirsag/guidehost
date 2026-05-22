@@ -44,13 +44,6 @@ export default function DashboardLayoutWrapper({ children, plan, userName }: Das
         />
       )}
 
-      {/* BRUTAL TEST OVERLAY */}
-      {isMobileMenuOpen && (
-        <div className="fixed inset-0 bg-red-500 z-[9999] flex items-center justify-center flex-col gap-4">
-          <h1 className="text-white text-4xl font-bold">MENU APERTO!</h1>
-          <button onClick={closeMenu} className="bg-white text-red-500 px-6 py-3 rounded-xl font-bold">CHIUDI</button>
-        </div>
-      )}
 
       {/* Main Dashboard Container */}
       <div className="flex flex-col flex-1 min-w-0 md:pl-64 min-h-[100dvh]">
