@@ -2,7 +2,6 @@
 
 import Link from 'next/link'
 import { BookOpen, Globe, GlobeLock, ArrowRight, Plus } from 'lucide-react'
-import { motion } from 'framer-motion'
 
 interface Property {
   name: string
@@ -23,10 +22,7 @@ interface GuidesClientProps {
 
 export default function GuidesClient({ guides }: GuidesClientProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+    <div
       className="space-y-6 max-w-5xl mx-auto"
     >
       {/* Header */}
@@ -129,6 +125,6 @@ export default function GuidesClient({ guides }: GuidesClientProps) {
           </Link>
         </div>
       )}
-    </motion.div>
+    </div>
   )
 }

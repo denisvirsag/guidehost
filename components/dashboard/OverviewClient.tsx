@@ -10,7 +10,6 @@ import {
   TrendingUp,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { motion } from 'framer-motion'
 
 interface Property {
   id: string
@@ -72,10 +71,7 @@ export default function OverviewClient({
   ]
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+    <div
       className="space-y-6 max-w-5xl mx-auto"
     >
       {/* Greeting Header */}
@@ -250,6 +246,6 @@ export default function OverviewClient({
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   )
 }
