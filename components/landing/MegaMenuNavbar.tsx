@@ -19,9 +19,8 @@ export function MegaMenuNavbar() {
   }, [])
 
   const navItems = [
-    { label: 'Come funziona', href: '/#how-it-works' },
-    { label: 'Perché GuideHost', href: '/#why-guidehost' },
-    { label: 'Prezzi', href: '/#pricing' },
+    { label: 'Funzionalità', href: '/funzionalita' },
+    { label: 'Prezzi', href: '/prezzi' },
     { label: 'Supporto', href: '/supporto' },
   ]
 
