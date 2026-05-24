@@ -20,7 +20,7 @@ const STEPS = [
 
 export function HowItWorks() {
   return (
-    <section className="py-20 bg-white relative overflow-hidden">
+    <section id="how-it-works" className="py-20 bg-white relative overflow-hidden">
       <div className="max-w-5xl mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-slate-900 mb-4">

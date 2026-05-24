@@ -21,7 +21,7 @@ const PAIN_POINTS = [
 
 export function ProblemSection() {
   return (
-    <section className="py-20 bg-slate-900 text-white relative overflow-hidden">
+    <section id="why-guidehost" className="py-20 bg-slate-900 text-white relative overflow-hidden">
       {/* Decorative subtle gradient */}
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent" />
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[#FF5A5F]/10 blur-[120px] rounded-full pointer-events-none" />
