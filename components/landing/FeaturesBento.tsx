@@ -95,38 +95,36 @@ export function FeaturesBento() {
                     </div>
                   </div>
 
-                  {/* Phone Mockup on the right to fill space and look highly premium */}
-                  <div className="hidden md:flex items-end justify-center w-[200px] relative overflow-hidden h-full shrink-0 select-none pointer-events-none">
-                    <div className="w-[180px] bg-slate-900 rounded-t-2xl p-2 pb-0 shadow-2xl border-t-2 border-x-2 border-slate-800 translate-y-4 transition-transform duration-500 group-hover:translate-y-2">
-                      <div className="w-full h-[180px] bg-white rounded-t-xl overflow-hidden p-2.5 space-y-2 text-left">
-                        {/* Status bar */}
-                        <div className="flex items-center justify-between border-b pb-1">
-                          <span className="text-[8px] font-bold text-slate-800">GuideHost</span>
-                          <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
+                  {/* QR Code Stand Mockup on the right to fill space and look highly premium */}
+                  <div className="hidden md:flex items-center justify-center w-[200px] relative overflow-hidden h-full shrink-0 select-none pointer-events-none">
+                    <div className="flex flex-col items-center translate-y-3 transition-transform duration-500 group-hover:translate-y-1">
+                      {/* Stand Frame */}
+                      <div className="w-[120px] h-[140px] bg-slate-50 border border-slate-200 shadow-lg rounded-xl p-3 flex flex-col items-center justify-between text-center relative bg-gradient-to-b from-white to-slate-50">
+                        {/* Acrylic reflection effect */}
+                        <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-tr from-white/0 via-white/20 to-white/40 rounded-t-xl" />
+                        
+                        {/* Frame Header */}
+                        <div className="text-[7px] font-bold text-slate-400 uppercase tracking-widest leading-none mt-1">
+                          GuideHost
                         </div>
-                        {/* Welcome text */}
-                        <div className="space-y-1">
-                          <div className="w-6 h-1.5 bg-slate-200 rounded" />
-                          <div className="w-12 h-2.5 bg-slate-300 rounded" />
-                        </div>
-                        {/* Wifi card */}
-                        <div className="p-1.5 border rounded-lg bg-slate-50 space-y-1">
-                          <div className="flex items-center gap-1">
-                            <span className="text-[8px]">📶</span>
-                            <div className="w-10 h-1 bg-slate-300 rounded" />
+
+                        {/* QR Code Graphic */}
+                        <div className="relative w-16 h-16 bg-white border border-slate-100 rounded-lg flex items-center justify-center shadow-inner">
+                          <QrCode size={48} className="text-slate-800" />
+                          {/* Inner brand dot */}
+                          <div className="absolute w-3.5 h-3.5 bg-[#FF5A5F] rounded-md border border-white flex items-center justify-center shadow-sm">
+                            <div className="w-1 h-1 bg-white rounded-full" />
                           </div>
-                          <div className="w-16 h-2 bg-slate-400 rounded" />
                         </div>
-                        {/* Rules section */}
-                        <div className="space-y-1">
-                          <div className="w-8 h-2 bg-slate-300 rounded" />
-                          <div className="flex gap-1">
-                            <div className="w-3.5 h-3.5 bg-slate-100 border rounded" />
-                            <div className="w-3.5 h-3.5 bg-slate-100 border rounded" />
-                            <div className="w-3.5 h-3.5 bg-slate-100 border rounded" />
-                          </div>
+
+                        {/* Frame Footer */}
+                        <div className="bg-slate-900 text-white text-[7px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider mb-1">
+                          Scansiona Qui
                         </div>
                       </div>
+                      
+                      {/* Stand Base */}
+                      <div className="w-[130px] h-[10px] bg-slate-800 rounded-lg shadow-md border-t border-slate-700/50" />
                     </div>
                   </div>
 
