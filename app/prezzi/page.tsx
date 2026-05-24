@@ -46,6 +46,7 @@ export default function PrezziPage() {
         'Fino a 5 guide ospiti attive',
         'Sezioni e contenuti illimitati',
         'QR code vettoriale ad alta definizione per la stampa',
+        'Traduzione automatica multilingua',
         'Verifica degli accessi degli ospiti (Tracking)',
         'Colori personalizzati per riflettere il tuo brand',
         'Supporto prioritario via email (risposta < 12 ore)',

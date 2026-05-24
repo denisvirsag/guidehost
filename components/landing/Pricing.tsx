@@ -19,7 +19,7 @@ const PLANS = [
     name: 'Pro',
     price: 9,
     description: 'Per host attivi che gestiscono più alloggi',
-    features: ['Fino a 5 guide ospiti', 'Sezioni e contenuti illimitati', 'QR code vettoriale per la stampa', 'Verifica degli accessi degli ospiti', 'Colori personalizzati per la guida', 'Supporto prioritario via email'],
+    features: ['Fino a 5 guide ospiti', 'Sezioni e contenuti illimitati', 'QR code vettoriale per la stampa', 'Traduzione automatica multilingua', 'Verifica degli accessi degli ospiti', 'Colori personalizzati per la guida', 'Supporto prioritario via email'],
     cta: 'Prova gratis Pro per 14 giorni',
     href: '/signup?plan=pro',
     highlight: true,

@@ -1,6 +1,7 @@
 import { MegaMenuNavbar } from '@/components/landing/MegaMenuNavbar'
 import { Footer } from '@/components/landing/Footer'
 import Link from 'next/link'
+import { cn } from '@/lib/utils'
 import { 
   QrCode, 
   RefreshCw, 
@@ -32,6 +33,8 @@ export default function FunzionalitaPage() {
       desc: 'Genera codici QR personalizzati da stampare e appendere in casa. Gli ospiti li inquadrano e accedono all\'istante senza installare nulla.',
       color: 'text-indigo-600',
       bg: 'bg-indigo-50',
+      availability: 'Incluso in tutti i piani',
+      paidOnly: false,
     },
     {
       icon: RefreshCw,
@@ -39,6 +42,8 @@ export default function FunzionalitaPage() {
       desc: 'Cambia la password del WiFi o gli orari di checkout dal pannello di controllo. La guida degli ospiti si aggiorna in tempo reale in un secondo.',
       color: 'text-amber-600',
       bg: 'bg-amber-50',
+      availability: 'Incluso in tutti i piani',
+      paidOnly: false,
     },
     {
       icon: Globe,
@@ -46,6 +51,8 @@ export default function FunzionalitaPage() {
       desc: 'Scrivi in italiano e GuideHost traduce automaticamente la guida nella lingua del telefono dell\'ospite (inglese, tedesco, francese, ecc.).',
       color: 'text-emerald-600',
       bg: 'bg-emerald-50',
+      availability: 'Piani a pagamento (Pro / Business)',
+      paidOnly: true,
     },
     {
       icon: ShieldCheck,
@@ -53,6 +60,8 @@ export default function FunzionalitaPage() {
       desc: 'Ricevi una notifica o controlla le statistiche per sapere quando l\'ospite ha aperto la guida per la prima volta. Meno ansia da check-in.',
       color: 'text-rose-600',
       bg: 'bg-rose-50',
+      availability: 'Piani a pagamento (Pro / Business)',
+      paidOnly: true,
     },
     {
       icon: Share2,
@@ -60,6 +69,8 @@ export default function FunzionalitaPage() {
       desc: 'Invia il link web della guida tramite messaggi automatici su Airbnb, Booking o WhatsApp con un semplice copia e incolla.',
       color: 'text-sky-600',
       bg: 'bg-sky-50',
+      availability: 'Incluso in tutti i piani',
+      paidOnly: false,
     },
   ]
 
@@ -79,7 +90,7 @@ export default function FunzionalitaPage() {
     {
       aspect: 'Ospiti internazionali',
       withoutGH: 'Frustrazione nel tradurre o spiegare tutto in 3 lingue diverse.',
-      withGH: 'Traduzione automatica nativa integrata basata sul browser.',
+      withGH: 'Traduzione automatica nativa integrata basata sul browser (Pro/Business).',
       status: true,
     },
     {
@@ -91,7 +102,7 @@ export default function FunzionalitaPage() {
     {
       aspect: 'Sicurezza ed Accessi',
       withoutGH: 'Nessun modo di sapere se l\'ospite ha letto le regole prima di entrare.',
-      withGH: 'Notifica e tracking delle visualizzazioni per prevenire problemi.',
+      withGH: 'Notifica e tracking delle visualizzazioni per prevenire problemi (Pro/Business).',
       status: true,
     },
   ]
@@ -139,8 +150,11 @@ export default function FunzionalitaPage() {
                     <h3 className="text-xl font-bold text-slate-900 mb-3">{f.title}</h3>
                     <p className="text-slate-600 text-sm leading-relaxed mb-6">{f.desc}</p>
                   </div>
-                  <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
-                    Incluso in tutti i piani
+                  <div className={cn(
+                    "text-xs font-bold uppercase tracking-wider",
+                    f.paidOnly ? "text-[#FF5A5F]" : "text-slate-400"
+                  )}>
+                    {f.availability}
                   </div>
                 </div>
               ))}
