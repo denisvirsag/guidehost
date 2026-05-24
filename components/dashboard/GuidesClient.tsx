@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { BookOpen, Globe, GlobeLock, ArrowRight, Plus } from 'lucide-react'
+import NewPropertyButton from './NewPropertyButton'
 
 interface Property {
   name: string
@@ -35,13 +36,10 @@ export default function GuidesClient({ guides }: GuidesClientProps) {
             {guides?.length ?? 0} {guides?.length === 1 ? 'guida creata' : 'guide create'}
           </p>
         </div>
-        <Link 
-          href="/dashboard/properties/new" 
-          className="inline-flex h-10 items-center justify-center gap-1.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 px-4 text-xs font-semibold text-slate-700 shadow-sm transition-colors self-start sm:self-auto"
-        >
-          <Plus size={16} />
-          Nuova proprietà
-        </Link>
+        <NewPropertyButton 
+          label="Nuova proprietà"
+          variant="outline"
+        />
       </div>
 
       {/* Guides List / Empty State */}
@@ -116,13 +114,10 @@ export default function GuidesClient({ guides }: GuidesClientProps) {
           <p className="text-sm text-slate-500 max-w-xs mt-2 leading-relaxed">
             Le guide vengono create automaticamente quando aggiungi una proprietà. Aggiungine una per iniziare.
           </p>
-          <Link 
-            href="/dashboard/properties/new" 
-            className="inline-flex h-10 items-center justify-center gap-1.5 rounded-xl bg-[#FF5A5F] px-5 text-xs font-semibold text-white shadow-md shadow-[#FF5A5F]/15 hover:bg-[#E04950] transition-colors mt-6"
-          >
-            <Plus size={14} />
-            Aggiungi proprietà
-          </Link>
+          <NewPropertyButton 
+            label="Aggiungi proprietà"
+            variant="empty"
+          />
         </div>
       )}
     </div>

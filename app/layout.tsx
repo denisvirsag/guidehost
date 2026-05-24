@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
+import PostHogProvider from '@/components/analytics/PostHogProvider'
 import './globals.css'
 
 export const viewport: Viewport = {
@@ -40,7 +41,9 @@ export default function RootLayout({
   return (
     <html lang="it" className={inter.variable} suppressHydrationWarning>
       <body suppressHydrationWarning>
-        {children}
+        <PostHogProvider>
+          {children}
+        </PostHogProvider>
       </body>
     </html>
   )

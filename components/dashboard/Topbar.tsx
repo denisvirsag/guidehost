@@ -1,8 +1,9 @@
 'use client'
 
 import Link from 'next/link'
-import { Bell, Plus, Menu } from 'lucide-react'
+import { Plus, Menu } from 'lucide-react'
 import { useEffect, useRef } from 'react'
+import NewPropertyButton from './NewPropertyButton'
 
 interface TopbarProps {
   breadcrumb?: Array<{ label: string; href?: string }>
@@ -75,23 +76,16 @@ export default function Topbar({ breadcrumb, onMenuClick }: TopbarProps) {
 
       {/* Actions */}
       <div className="flex items-center gap-2 md:gap-3">
-        <Link
-          href="/dashboard/properties/new"
+        <NewPropertyButton
+          variant="custom"
           className="inline-flex h-9 items-center justify-center gap-1.5 rounded-xl bg-slate-900 px-3 md:px-4 text-xs font-semibold text-white shadow-sm hover:bg-slate-800 transition-colors"
         >
           <Plus size={14} />
           <span className="hidden sm:inline">Nuova proprietà</span>
           <span className="sm:hidden">Nuova</span>
-        </Link>
-        <button
-          type="button"
-          className="relative inline-flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-500 hover:text-slate-700 hover:bg-slate-50 transition-colors shadow-sm"
-          title="Notifiche"
-        >
-          <Bell size={16} />
-          <span className="absolute top-1.5 right-1.5 h-1.5 w-1.5 rounded-full bg-[#FF5A5F]" />
-        </button>
+        </NewPropertyButton>
       </div>
     </header>
+
   )
 }

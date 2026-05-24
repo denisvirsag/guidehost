@@ -14,6 +14,7 @@ create table public.profiles (
   stripe_customer_id text unique,
   plan text not null default 'free' check (plan in ('free', 'pro', 'business')),
   plan_status text check (plan_status in ('active', 'canceled', 'past_due', 'trialing')),
+  is_admin boolean not null default false,
   created_at timestamp with time zone default timezone('utc'::text, now()) not null
 );
 
@@ -183,3 +184,24 @@ create index idx_guide_sections_guide on public.guide_sections(guide_id);
 create index idx_guide_sections_order on public.guide_sections(guide_id, "order");
 create index idx_guide_views_guide on public.guide_views(guide_id);
 create index idx_guide_views_date on public.guide_views(guide_id, viewed_at);
+
+-- ============================================
+-- GUIDE SECTION TRANSLATIONS (caching)
+-- ============================================
+create table public.guide_section_translations (
+  id uuid default uuid_generate_v4() primary key,
+  section_id uuid references public.guide_sections(id) on delete cascade not null,
+  language text not null,
+  translated_title text,
+  translated_content jsonb,
+  created_at timestamp with time zone default timezone('utc'::text, now()) not null,
+  unique(section_id, language)
+);
+
+-- RLS for translations
+alter table public.guide_section_translations enable row level security;
+
+create policy "Anyone can view translations"
+  on public.guide_section_translations for select
+  using (true);
+

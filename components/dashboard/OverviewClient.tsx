@@ -9,6 +9,7 @@ import {
   ArrowRight,
   TrendingUp,
 } from 'lucide-react'
+import NewPropertyButton from './NewPropertyButton'
 import { cn } from '@/lib/utils'
 
 interface Property {
@@ -207,13 +208,7 @@ export default function OverviewClient({
               <p className="text-xs text-slate-500 max-w-xs mt-1">
                 Aggiungi la tua prima casa e crea la guida interattiva per i tuoi ospiti.
               </p>
-              <Link 
-                href="/dashboard/properties/new" 
-                className="inline-flex h-9 items-center justify-center gap-1.5 rounded-xl bg-[#FF5A5F] px-4 text-xs font-semibold text-white shadow-md shadow-[#FF5A5F]/15 hover:bg-[#E04950] transition-colors mt-4"
-              >
-                <Plus size={14} />
-                Aggiungi proprietà
-              </Link>
+              <NewPropertyButton variant="empty" label="Aggiungi proprietà" />
             </div>
           )}
         </div>
@@ -224,15 +219,15 @@ export default function OverviewClient({
             Azioni Rapide
           </h2>
           <div className="p-4 bg-white border border-slate-100 rounded-2xl shadow-sm space-y-2.5">
-            <Link 
-              href="/dashboard/properties/new" 
+            <NewPropertyButton 
+              variant="custom"
               className="group flex items-center gap-3 w-full p-2.5 rounded-xl border border-slate-100 hover:border-slate-200/80 bg-slate-50/50 hover:bg-slate-50 transition-all text-left"
             >
               <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-white border border-slate-100 text-slate-600 group-hover:text-[#FF5A5F] group-hover:border-[#FF5A5F]/20 transition-all shrink-0">
                 <Plus size={14} />
               </div>
               <span className="text-xs font-semibold text-slate-700">Nuova proprietà</span>
-            </Link>
+            </NewPropertyButton>
 
             <Link 
               href="/dashboard/guides" 

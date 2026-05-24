@@ -3,44 +3,44 @@ import { cn } from '@/lib/utils'
 
 const FEATURES = [
   {
-    icon: Smartphone,
-    title: 'Ospiti autonomi dal primo minuto',
-    desc: 'Gli ospiti trovano subito le istruzioni per accendere il riscaldamento, usare la lavastoviglie o trovare la password del WiFi, senza doverti mandare un messaggio.',
-    className: 'md:col-span-2 md:row-span-2',
-    color: 'bg-violet-100 text-violet-600',
-  },
-  {
     icon: QrCode,
-    title: 'Check-in senza stress',
-    desc: 'Genera un QR code da stampare ed esporre all\'ingresso. L\'ospite lo inquadra con il telefono e accede subito a tutte le informazioni, senza installare alcuna app.',
-    className: 'md:col-span-1 md:row-span-1',
+    title: 'QR code all\'ingresso',
+    desc: 'Stampa il QR e appendi all\'ingresso. L\'ospite lo inquadra e accede subito a tutto, senza app da scaricare.',
+    className: 'md:col-span-2 md:row-span-2',
     color: 'bg-blue-100 text-blue-600',
   },
   {
     icon: Zap,
-    title: 'Informazioni sempre aggiornate',
-    desc: 'Se cambi la password del WiFi o modifichi le regole del checkout, aggiorni la guida in un secondo dal tuo telefono. Il link e il QR code restano gli stessi.',
+    title: 'Aggiornamenti istantanei',
+    desc: 'Hai cambiato la password WiFi? Aggiorni la guida dal telefono in 10 secondi. Il link resta lo stesso.',
     className: 'md:col-span-1 md:row-span-1',
     color: 'bg-rose-100 text-[#FF5A5F]',
   },
   {
     icon: BarChart3,
-    title: 'Tracciamento degli accessi',
-    desc: 'Vedi se gli ospiti hanno aperto la guida prima del loro arrivo. In questo modo ti assicuri che abbiano letto le istruzioni stradali prima di mettersi in viaggio.',
+    title: 'Verifica che l\'abbiano letto',
+    desc: 'Traccia chi ha aperto la guida prima dell\'arrivo. Sai già che le istruzioni stradali sono state viste.',
     className: 'md:col-span-1 md:row-span-1',
     color: 'bg-emerald-100 text-emerald-600',
   },
   {
     icon: Globe,
     title: 'Condivisione automatica',
-    desc: 'Copia il link unico e inseriscilo nei messaggi automatici di Airbnb, Booking o WhatsApp. Gli ospiti lo ricevono subito dopo la conferma di prenotazione.',
+    desc: 'Inserisci il link nei messaggi automatici di Airbnb o Booking. Gli ospiti lo ricevono subito dopo la prenotazione.',
     className: 'md:col-span-1 md:row-span-1',
     color: 'bg-amber-100 text-amber-600',
   },
   {
+    icon: Smartphone,
+    title: 'Traduzione automatica',
+    desc: 'GuideHost rileva la lingua dell\'ospite e traduce tutto in automatico. Il tedesco legge in tedesco, l\'inglese in inglese.',
+    className: 'md:col-span-1 md:row-span-1',
+    color: 'bg-violet-100 text-violet-600',
+  },
+  {
     icon: Shield,
-    title: 'Recensioni migliori su Airbnb',
-    desc: 'Offrire una guida chiara e professionale fa sentire gli ospiti accolti e riduce i disguidi. Il risultato è un aumento immediato dei voti positivi sulla tua scheda.',
+    title: 'Zero manutenzione',
+    desc: 'Nessun PDF da aggiornare e re-inviare. Ogni modifica è live all\'istante, così la tua guida è sempre perfetta e professionale.',
     className: 'md:col-span-1 md:row-span-1',
     color: 'bg-pink-100 text-pink-600',
   },
@@ -55,11 +55,12 @@ export function FeaturesBento() {
 
       <div className="max-w-5xl mx-auto px-6 relative z-10">
         <div className="text-center mb-12">
+          <div className="inline-block text-sm font-bold text-[#FF5A5F] tracking-wider uppercase mb-2">La soluzione</div>
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-3">
-            Tutto quello che ti serve per stupire i tuoi ospiti
+            Tutto quello che serve agli ospiti, in un link
           </h2>
           <p className="text-base text-slate-600">
-            Progettato per semplificare la gestione del tuo affitto breve e valorizzare la tua struttura.
+            GuideHost crea una guida digitale professionale per il tuo alloggio. Condividila in automatico dopo ogni prenotazione.
           </p>
         </div>
 

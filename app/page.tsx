@@ -1,8 +1,14 @@
 import type { Metadata } from 'next'
-import { Navbar } from '@/components/landing/Navbar'
+import { MegaMenuNavbar } from '@/components/landing/MegaMenuNavbar'
 import { Hero } from '@/components/landing/Hero'
+import { ProblemSection } from '@/components/landing/ProblemSection'
 import { FeaturesBento } from '@/components/landing/FeaturesBento'
+import { HowItWorks } from '@/components/landing/HowItWorks'
+import { Reviews } from '@/components/landing/Reviews'
+import { Stats } from '@/components/landing/Stats'
 import { Pricing } from '@/components/landing/Pricing'
+import { FAQ } from '@/components/landing/FAQ'
+import { FinalCTA } from '@/components/landing/FinalCTA'
 import { Footer } from '@/components/landing/Footer'
 
 export const metadata: Metadata = {
@@ -22,11 +28,17 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-white font-sans selection:bg-[#FF5A5F]/20 selection:text-[#FF5A5F]">
-      <Navbar />
+      <MegaMenuNavbar />
       <main>
         <Hero />
+        <ProblemSection />
         <FeaturesBento />
+        <HowItWorks />
+        <Reviews />
+        <Stats />
         <Pricing />
+        <FAQ />
+        <FinalCTA />
       </main>
       <Footer />
     </div>

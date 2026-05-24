@@ -7,7 +7,7 @@ import PropertyDetailClient from './PropertyDetailClient'
 
 export const metadata: Metadata = { title: 'Dettaglio Proprietà' }
 
-export default async function PropertyDetailPage(props: PageProps<'/dashboard/properties/[id]'>) {
+export default async function PropertyDetailPage(props: { params: Promise<{ id: string }> }) {
   const { id } = await props.params
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()

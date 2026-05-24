@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { stripe } from '@/lib/stripe/client'
 import { createClient } from '@/lib/supabase/server'
 import type Stripe from 'stripe'
+import { getPostHogClient } from '@/lib/posthog-server'
 
 export async function POST(req: NextRequest) {
   const body = await req.text()
@@ -28,20 +29,43 @@ export async function POST(req: NextRequest) {
       if (priceId === process.env.STRIPE_PRICE_PRO) plan = 'pro'
       else if (priceId === process.env.STRIPE_PRICE_BUSINESS) plan = 'business'
 
-      await supabase
+      const { data: profile } = await supabase
         .from('profiles')
         .update({ plan, plan_status: status })
         .eq('stripe_customer_id', customerId)
+        .select('id')
+        .single()
+
+      if (profile?.id) {
+        const posthog = getPostHogClient()
+        posthog.capture({
+          distinctId: profile.id,
+          event: 'subscription_created',
+          properties: { plan, status, stripe_customer_id: customerId },
+        })
+      }
 
       break
     }
 
     case 'customer.subscription.deleted': {
       const subscription = event.data.object as Stripe.Subscription
-      await supabase
+      const { data: profile } = await supabase
         .from('profiles')
         .update({ plan: 'free', plan_status: 'canceled' })
         .eq('stripe_customer_id', subscription.customer as string)
+        .select('id')
+        .single()
+
+      if (profile?.id) {
+        const posthog = getPostHogClient()
+        posthog.capture({
+          distinctId: profile.id,
+          event: 'subscription_canceled',
+          properties: { stripe_customer_id: subscription.customer as string },
+        })
+      }
+
       break
     }
   }

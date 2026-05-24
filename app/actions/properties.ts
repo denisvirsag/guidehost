@@ -3,6 +3,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { generateSlug } from '@/lib/utils'
+import { getPostHogClient } from '@/lib/posthog-server'
 
 export async function createProperty(
   state: { error?: string } | undefined,
@@ -64,6 +65,13 @@ export async function createProperty(
     console.error('createProperty Supabase error:', JSON.stringify(error, null, 2))
     return { error: 'Errore durante la creazione della proprietà. Riprova.' }
   }
+
+  const posthog = getPostHogClient()
+  posthog.capture({
+    distinctId: user.id,
+    event: 'property_created',
+    properties: { property_id: property.id, property_name: name, plan: profile?.plan },
+  })
 
   // Auto-create a guide for the property
   const { data: guide } = await supabase.from('guides').insert({
@@ -151,6 +159,13 @@ export async function updateProperty(
 
   if (error) return { error: 'Errore durante il salvataggio.' }
 
+  const posthog = getPostHogClient()
+  posthog.capture({
+    distinctId: user.id,
+    event: 'property_updated',
+    properties: { property_id: propertyId, property_name: name },
+  })
+
   redirect(`/dashboard/properties/${propertyId}`)
 }
 
@@ -166,5 +181,40 @@ export async function deleteProperty(propertyId: string) {
     .eq('id', propertyId)
     .eq('owner_id', user.id)
 
+  const posthog = getPostHogClient()
+  posthog.capture({
+    distinctId: user.id,
+    event: 'property_deleted',
+    properties: { property_id: propertyId },
+  })
+
   redirect('/dashboard/properties')
+}
+
+export async function checkPropertyLimit() {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
+  if (!user) return { reachedLimit: false, limit: 1, plan: 'free' }
+
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('plan')
+    .eq('id', user.id)
+    .single()
+
+  const { count } = await supabase
+    .from('properties')
+    .select('id', { count: 'exact' })
+    .eq('owner_id', user.id)
+
+  const limits: Record<string, number> = { free: 1, pro: 5, business: Infinity }
+  const plan = profile?.plan ?? 'free'
+  const limit = limits[plan]
+  
+  return {
+    reachedLimit: (count ?? 0) >= limit,
+    limit,
+    plan,
+  }
 }

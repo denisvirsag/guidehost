@@ -2,7 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { NextRequest, NextResponse } from 'next/server'
 import QRCode from 'qrcode'
 
-export async function GET(req: NextRequest, ctx: RouteContext<'/api/qr/[guideId]'>) {
+export async function GET(req: NextRequest, ctx: { params: Promise<{ guideId: string }> }) {
   const { guideId } = await ctx.params
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()

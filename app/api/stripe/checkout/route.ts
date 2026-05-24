@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { stripe } from '@/lib/stripe/client'
+import { getPostHogClient } from '@/lib/posthog-server'
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url)
@@ -42,6 +43,13 @@ export async function GET(req: NextRequest) {
       subscription_data: {
         trial_period_days: plan === 'pro' ? 14 : undefined,
       },
+    })
+
+    const posthog = getPostHogClient()
+    posthog.capture({
+      distinctId: user.id,
+      event: 'checkout_initiated',
+      properties: { plan, current_plan: profile?.plan },
     })
 
     return NextResponse.redirect(session.url!)

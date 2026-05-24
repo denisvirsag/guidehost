@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { stripe } from '@/lib/stripe/client'
+import { getPostHogClient } from '@/lib/posthog-server'
 
 export async function GET(req: NextRequest) {
   const supabase = await createClient()
@@ -25,6 +26,13 @@ export async function GET(req: NextRequest) {
     const session = await stripe.billingPortal.sessions.create({
       customer: profile.stripe_customer_id,
       return_url: `${appUrl}/dashboard/settings/billing`,
+    })
+
+    const posthog = getPostHogClient()
+    posthog.capture({
+      distinctId: user.id,
+      event: 'billing_portal_accessed',
+      properties: { stripe_customer_id: profile.stripe_customer_id },
     })
 
     return NextResponse.redirect(session.url)

@@ -1,6 +1,9 @@
+'use client'
+
 import { Check } from 'lucide-react'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
+import posthog from 'posthog-js'
 
 const PLANS = [
   {
@@ -84,6 +87,7 @@ export function Pricing() {
 
               <Link
                 href={plan.href}
+                onClick={() => posthog.capture('pricing_plan_clicked', { plan_name: plan.name, plan_price: plan.price })}
                 className={cn(
                   "w-full py-2.5 px-4 rounded-xl text-sm font-semibold text-center transition-colors duration-200",
                   plan.highlight

@@ -5,6 +5,7 @@ import { Plus, GripVertical, Eye, EyeOff, Trash2, Globe, GlobeLock, Loader2, Pal
 import { publishGuide, addSection, deleteSection, updateSection, reorderSections, updateGuideTheme } from '@/app/actions/guides'
 import { getSectionIcon, getSectionLabel } from '@/lib/utils'
 import type { GuideSection, SectionType } from '@/types'
+import posthog from 'posthog-js'
 
 const SECTION_TYPES: SectionType[] = [
   'welcome', 'wifi', 'checkin', 'rules', 'how_to',
@@ -39,9 +40,11 @@ export default function GuideEditorClient({ guide, sections: initialSections, pr
   const activeSection = sections.find(s => s.id === activeId) ?? null
 
   function handlePublish() {
+    const nextPublished = !published
     startTransition(async () => {
-      await publishGuide(guide.id, !published)
-      setPublished(!published)
+      await publishGuide(guide.id, nextPublished)
+      setPublished(nextPublished)
+      posthog.capture('guide_published', { guide_id: guide.id, published: nextPublished })
     })
   }
 
@@ -51,6 +54,7 @@ export default function GuideEditorClient({ guide, sections: initialSections, pr
       if (newSection) {
         setSections(prev => [...prev, newSection as GuideSection])
         setActiveId(newSection.id)
+        posthog.capture('guide_section_added', { guide_id: guide.id, section_type: type })
       }
       setShowAddPanel(false)
     })
@@ -58,11 +62,13 @@ export default function GuideEditorClient({ guide, sections: initialSections, pr
 
   function handleDeleteSection(sectionId: string) {
     if (!confirm('Eliminare questa sezione?')) return
+    const section = sections.find(s => s.id === sectionId)
     startTransition(async () => {
       await deleteSection(sectionId, guide.id)
       const remaining = sections.filter(s => s.id !== sectionId)
       setSections(remaining)
       if (activeId === sectionId) setActiveId(remaining[0]?.id ?? null)
+      posthog.capture('guide_section_deleted', { guide_id: guide.id, section_id: sectionId, section_type: section?.type })
     })
   }
 
@@ -70,6 +76,7 @@ export default function GuideEditorClient({ guide, sections: initialSections, pr
     startTransition(async () => {
       await updateSection(section.id, guide.id, { visible: !section.visible })
       setSections(prev => prev.map(s => s.id === section.id ? { ...s, visible: !s.visible } : s))
+      posthog.capture('guide_section_visibility_toggled', { guide_id: guide.id, section_id: section.id, section_type: section.type, visible: !section.visible })
     })
   }
 
@@ -93,6 +100,7 @@ export default function GuideEditorClient({ guide, sections: initialSections, pr
     startTransition(async () => {
       await updateGuideTheme(guide.id, theme, accent)
       refreshPreview()
+      posthog.capture('guide_theme_saved', { guide_id: guide.id, theme, accent_color: accent })
     })
   }
 
@@ -390,6 +398,7 @@ function SectionEditorPanel({
       onUpdate({ ...section, title, content })
       setSaved(true)
       setTimeout(() => setSaved(false), 2000)
+      posthog.capture('guide_section_saved', { guide_id: guideId, section_id: section.id, section_type: section.type })
     })
   }
 

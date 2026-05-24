@@ -7,7 +7,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = { title: 'Editor Guida' }
 
-export default async function GuideEditorPage(props: PageProps<'/dashboard/guides/[id]'>) {
+export default async function GuideEditorPage(props: { params: Promise<{ id: string }> }) {
   const { id } = await props.params
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()

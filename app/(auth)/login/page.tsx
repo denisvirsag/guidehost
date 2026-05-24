@@ -4,8 +4,10 @@ import { useActionState } from 'react'
 import Link from 'next/link'
 import { login } from '@/app/actions/auth'
 import { Loader2 } from 'lucide-react'
+import { usePostHog } from 'posthog-js/react'
 
 export default function LoginPage() {
+  const posthog = usePostHog()
   const [state, action, pending] = useActionState(login, undefined)
 
   return (
@@ -38,7 +40,18 @@ export default function LoginPage() {
       )}
 
       {/* Form */}
-      <form action={action} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <form
+        action={action}
+        onSubmit={(e) => {
+          const formData = new FormData(e.currentTarget)
+          const email = formData.get('email') as string
+          if (email) {
+            posthog.identify(email, { email })
+            posthog.capture('user_logged_in', { email })
+          }
+        }}
+        style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
+      >
         <div className="form-group">
           <label className="label" htmlFor="email">Email</label>
           <input

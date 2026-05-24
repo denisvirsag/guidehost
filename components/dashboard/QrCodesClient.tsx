@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { QrCode, Download, ExternalLink } from 'lucide-react'
+import posthog from 'posthog-js'
 
 interface Property {
   name: string
@@ -78,6 +79,7 @@ export default function QrCodesClient({ guides, appUrl }: QrCodesClientProps) {
                     <a
                       href={`/api/qr/${guide.id}?format=png`}
                       download
+                      onClick={() => posthog.capture('qr_code_downloaded', { guide_id: guide.id, format: 'png' })}
                       className="flex-1 inline-flex h-9 items-center justify-center gap-1.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-xs font-semibold text-slate-700 shadow-sm transition-colors"
                     >
                       <Download size={13} />
@@ -86,6 +88,7 @@ export default function QrCodesClient({ guides, appUrl }: QrCodesClientProps) {
                     <a
                       href={`/api/qr/${guide.id}?format=svg`}
                       download
+                      onClick={() => posthog.capture('qr_code_downloaded', { guide_id: guide.id, format: 'svg' })}
                       className="flex-1 inline-flex h-9 items-center justify-center gap-1.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-xs font-semibold text-slate-700 shadow-sm transition-colors"
                     >
                       <Download size={13} />

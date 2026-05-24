@@ -4,8 +4,10 @@ import { useActionState } from 'react'
 import Link from 'next/link'
 import { signup } from '@/app/actions/auth'
 import { Loader2, Check } from 'lucide-react'
+import { usePostHog } from 'posthog-js/react'
 
 export default function SignupPage() {
+  const posthog = usePostHog()
   const [state, action, pending] = useActionState(signup, undefined)
 
   return (
@@ -57,7 +59,19 @@ export default function SignupPage() {
       )}
 
       {/* Form */}
-      <form action={action} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <form
+        action={action}
+        onSubmit={(e) => {
+          const formData = new FormData(e.currentTarget)
+          const email = formData.get('email') as string
+          const full_name = formData.get('full_name') as string
+          if (email) {
+            posthog.identify(email, { email, name: full_name })
+            posthog.capture('user_signed_up', { email, name: full_name })
+          }
+        }}
+        style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
+      >
         <div className="form-group">
           <label className="label" htmlFor="full_name">Nome completo</label>
           <input

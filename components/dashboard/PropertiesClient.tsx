@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { Plus, Building2, ArrowRight, Wifi, MapPin } from 'lucide-react'
+import NewPropertyButton from './NewPropertyButton'
 
 interface Property {
   id: string
@@ -32,13 +33,10 @@ export default function PropertiesClient({ properties }: PropertiesClientProps) 
             {properties?.length ?? 0} {properties?.length === 1 ? 'proprietà gestita' : 'proprietà gestite'}
           </p>
         </div>
-        <Link 
-          href="/dashboard/properties/new" 
-          className="inline-flex h-10 items-center justify-center gap-1.5 rounded-xl bg-[#FF5A5F] px-4 text-xs font-semibold text-white shadow-md shadow-[#FF5A5F]/15 hover:bg-[#E04950] transition-colors self-start sm:self-auto"
-        >
-          <Plus size={16} />
-          Aggiungi proprietà
-        </Link>
+        <NewPropertyButton 
+          label="Aggiungi proprietà"
+          variant="primary"
+        />
       </div>
 
       {/* Grid / Empty State */}
@@ -135,13 +133,10 @@ export default function PropertiesClient({ properties }: PropertiesClientProps) 
           <p className="text-sm text-slate-500 max-w-xs mt-2 leading-relaxed">
             Aggiungi la tua prima proprietà per iniziare a creare guide interattive e digitali per i tuoi ospiti.
           </p>
-          <Link 
-            href="/dashboard/properties/new" 
-            className="inline-flex h-10 items-center justify-center gap-1.5 rounded-xl bg-[#FF5A5F] px-5 text-xs font-semibold text-white shadow-md shadow-[#FF5A5F]/15 hover:bg-[#E04950] transition-colors mt-6"
-          >
-            <Plus size={14} />
-            Aggiungi la prima proprietà
-          </Link>
+          <NewPropertyButton 
+            label="Aggiungi la prima proprietà"
+            variant="empty"
+          />
         </div>
       )}
     </div>
