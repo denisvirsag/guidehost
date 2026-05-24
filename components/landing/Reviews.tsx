@@ -10,20 +10,25 @@ const REVIEWS = [
     quote: "Gli ospiti adorano trovare tutto sul loro telefono senza dover scaricare nulla. Le mie recensioni sulla comunicazione sono fisse a 5 stelle.",
     author: "Elena S.",
     role: "Property Manager",
+  },
+  {
+    quote: "Il kit di QR code è fantastico. L'ho appeso all'ingresso ed è diventato il punto di riferimento per gli ospiti per qualsiasi cosa: wifi, regole e checkout.",
+    author: "Gianluca R.",
+    role: "Host a Firenze (3 appartamenti)",
   }
 ]
 
 export function Reviews() {
   return (
     <section className="py-20 bg-slate-50 relative overflow-hidden">
-      <div className="max-w-5xl mx-auto px-6 relative z-10">
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-slate-900 mb-4">
             Scelto dai migliori host in Italia
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           {REVIEWS.map((review, i) => (
             <div key={i} className="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 flex flex-col justify-between">
               <div>
