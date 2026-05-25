@@ -68,7 +68,7 @@ export default function PrezziPage() {
         'Rilascio white-label (nessun marchio GuideHost)',
         'Statistiche di visualizzazione avanzate e analitiche',
         'Integrazione API (prossimamente)',
-        'Assistenza telefonica dedicata 24/7',
+        'Supporto email prioritario 24/7',
       ],
       cta: 'Parla con noi',
       href: '/signup?plan=business',

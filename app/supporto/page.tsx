@@ -6,8 +6,6 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { 
   Mail, 
-  MessageCircle, 
-  Phone, 
   ArrowLeft, 
   ChevronDown, 
   CheckCircle2, 
@@ -201,35 +199,6 @@ export default function SupportoPage() {
                       <a href="mailto:supporto@guidehost.it" className="text-sm font-semibold text-blue-600 hover:underline block mt-2">
                         supporto@guidehost.it
                       </a>
-                    </div>
-                  </div>
-
-                  {/* Chat */}
-                  <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-purple-50 flex items-center justify-center text-purple-600 shrink-0">
-                      <MessageCircle size={22} />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-slate-900">Live Chat</h4>
-                      <p className="text-sm text-slate-500 mt-0.5">Supporto istantaneo dalla Dashboard</p>
-                      <span className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full mt-2">
-                        <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
-                        Risposta in meno di 5 min
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Telefono */}
-                  <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-rose-50 flex items-center justify-center text-rose-600 shrink-0">
-                      <Phone size={22} />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-slate-900">Linea Dedicata Telefonica</h4>
-                      <p className="text-sm text-slate-500 mt-0.5">Supporto vocale 24/7 per allarmi ed emergenze</p>
-                      <span className="inline-flex items-center text-xs font-bold text-rose-700 bg-rose-50 px-2 py-0.5 rounded-full mt-2">
-                        Esclusivo per piano Business
-                      </span>
                     </div>
                   </div>
                 </div>

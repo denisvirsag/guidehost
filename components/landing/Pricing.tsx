@@ -28,7 +28,7 @@ const PLANS = [
     name: 'Business',
     price: 29,
     description: 'Per property manager e agenzie',
-    features: ['Guide ospiti illimitate', 'Tutto incluso del piano Pro', 'Rilascio senza marchio GuideHost', 'Statistiche di visualizzazione avanzate', 'Assistenza dedicata via telefono'],
+    features: ['Guide ospiti illimitate', 'Tutto incluso del piano Pro', 'Rilascio senza marchio GuideHost', 'Statistiche di visualizzazione avanzate', 'Supporto prioritario 24/7'],
     cta: 'Parla con noi',
     href: '/signup?plan=business',
     highlight: false,
