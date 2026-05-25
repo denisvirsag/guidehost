@@ -5,7 +5,6 @@ import { Footer } from '@/components/landing/Footer'
 import Link from 'next/link'
 import { useState } from 'react'
 import { 
-  Mail, 
   ArrowLeft, 
   ChevronDown, 
   CheckCircle2, 
@@ -173,124 +172,96 @@ export default function SupportoPage() {
           </div>
         </section>
 
-        {/* Canali di Contatto & Form */}
+        {/* Form di Contatto Centrato */}
         <section className="bg-slate-50 py-20 border-y border-slate-100 mb-20">
-          <div className="max-w-6xl mx-auto px-6">
-            <div className="grid lg:grid-cols-12 gap-16">
-              
-              {/* Canali di Contatto */}
-              <div className="lg:col-span-5 space-y-8">
-                <div>
-                  <h2 className="text-3xl font-bold text-slate-900 mb-4">Non hai trovato la risposta?</h2>
-                  <p className="text-slate-600 leading-relaxed">
-                    Siamo a tua disposizione attraverso canali veloci e pronti a risolvere qualsiasi dubbio.
+          <div className="max-w-2xl mx-auto px-6">
+            <div className="text-center mb-10">
+              <h2 className="text-3xl font-bold text-slate-900 mb-3">Inviaci un messaggio diretto</h2>
+              <p className="text-slate-600">
+                Compila il modulo qui sotto e ti risponderemo all'indirizzo email fornito nel minor tempo possibile.
+              </p>
+            </div>
+
+            <div className="bg-white p-8 md:p-10 rounded-3xl border border-slate-100 shadow-md">
+              {isSuccess ? (
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="bg-emerald-50 border border-emerald-200 text-emerald-900 rounded-2xl p-8 text-center space-y-4"
+                >
+                  <CheckCircle2 className="w-12 h-12 text-emerald-500 mx-auto" />
+                  <h4 className="text-lg font-bold">Messaggio inviato con successo!</h4>
+                  <p className="text-sm text-emerald-700">
+                    Grazie per averci contattato. Il nostro team ti risponderà all'indirizzo email fornito nel minor tempo possibile.
                   </p>
-                </div>
-
-                <div className="space-y-6">
-                  {/* Email */}
-                  <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 shrink-0">
-                      <Mail size={22} />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-slate-900">Email di Supporto</h4>
-                      <p className="text-sm text-slate-500 mt-0.5">Scrivici in ogni momento</p>
-                      <a href="mailto:supporto@guidehost.it" className="text-sm font-semibold text-blue-600 hover:underline block mt-2">
-                        supporto@guidehost.it
-                      </a>
-                    </div>
+                  <button 
+                    onClick={() => setIsSuccess(false)}
+                    className="text-xs font-semibold text-emerald-800 underline hover:text-emerald-950"
+                  >
+                    Invia un altro messaggio
+                  </button>
+                </motion.div>
+              ) : (
+                <form onSubmit={handleFormSubmit} className="space-y-5">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Nome</label>
+                    <input
+                      type="text"
+                      required
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder="Il tuo nome"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-950 placeholder-slate-400 focus:border-slate-950 focus:ring-1 focus:ring-slate-950 outline-none text-sm transition-all"
+                    />
                   </div>
-                </div>
-              </div>
 
-              {/* Form di Contatto */}
-              <div className="lg:col-span-7">
-                <div className="bg-white p-8 md:p-10 rounded-3xl border border-slate-100 shadow-sm">
-                  <h3 className="text-2xl font-bold text-slate-900 mb-6">Inviaci un messaggio diretto</h3>
-                  
-                  {isSuccess ? (
-                    <motion.div 
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      className="bg-emerald-50 border border-emerald-200 text-emerald-900 rounded-2xl p-8 text-center space-y-4"
+                  <div>
+                    <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Email</label>
+                    <input
+                      type="email"
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="nome@esempio.it"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-955 placeholder-slate-400 focus:border-slate-950 focus:ring-1 focus:ring-slate-950 outline-none text-sm transition-all"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Piano Attuale</label>
+                    <select
+                      value={plan}
+                      onChange={(e) => setPlan(e.target.value)}
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 text-[#0f172a] focus:border-slate-950 focus:ring-1 focus:ring-slate-950 outline-none text-sm transition-all bg-white"
                     >
-                      <CheckCircle2 className="w-12 h-12 text-emerald-500 mx-auto" />
-                      <h4 className="text-lg font-bold">Messaggio inviato con successo!</h4>
-                      <p className="text-sm text-emerald-700">
-                        Grazie per averci contattato. Il nostro team ti risponderà all'indirizzo email fornito nel minor tempo possibile.
-                      </p>
-                      <button 
-                        onClick={() => setIsSuccess(false)}
-                        className="text-xs font-semibold text-emerald-800 underline hover:text-emerald-950"
-                      >
-                        Invia un altro messaggio
-                      </button>
-                    </motion.div>
-                  ) : (
-                    <form onSubmit={handleFormSubmit} className="space-y-5">
-                      <div>
-                        <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Nome</label>
-                        <input
-                          type="text"
-                          required
-                          value={name}
-                          onChange={(e) => setName(e.target.value)}
-                          placeholder="Il tuo nome"
-                          className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-900 placeholder-slate-400 focus:border-slate-950 focus:ring-1 focus:ring-slate-950 outline-none text-sm transition-all"
-                        />
-                      </div>
+                      <option value="free">Free</option>
+                      <option value="pro">Pro</option>
+                      <option value="business">Business</option>
+                      <option value="non-ancora">Non sono ancora registrato</option>
+                    </select>
+                  </div>
 
-                      <div>
-                        <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Email</label>
-                        <input
-                          type="email"
-                          required
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          placeholder="nome@esempio.it"
-                          className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-900 placeholder-slate-400 focus:border-slate-950 focus:ring-1 focus:ring-slate-950 outline-none text-sm transition-all"
-                        />
-                      </div>
+                  <div>
+                    <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Messaggio</label>
+                    <textarea
+                      required
+                      rows={4}
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      placeholder="Come possiamo aiutarti oggi?"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-950 placeholder-slate-400 focus:border-slate-950 focus:ring-1 focus:ring-slate-950 outline-none text-sm transition-all resize-none"
+                    />
+                  </div>
 
-                      <div>
-                        <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Piano Attuale</label>
-                        <select
-                          value={plan}
-                          onChange={(e) => setPlan(e.target.value)}
-                          className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-900 focus:border-slate-950 focus:ring-1 focus:ring-slate-950 outline-none text-sm transition-all bg-white"
-                        >
-                          <option value="free">Free</option>
-                          <option value="pro">Pro</option>
-                          <option value="business">Business</option>
-                          <option value="non-ancora">Non sono ancora registrato</option>
-                        </select>
-                      </div>
-
-                      <div>
-                        <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Messaggio</label>
-                        <textarea
-                          required
-                          rows={4}
-                          value={message}
-                          onChange={(e) => setMessage(e.target.value)}
-                          placeholder="Come possiamo aiutarti oggi?"
-                          className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-900 placeholder-slate-400 focus:border-slate-950 focus:ring-1 focus:ring-slate-950 outline-none text-sm transition-all resize-none"
-                        />
-                      </div>
-
-                      <button
-                        type="submit"
-                        disabled={isSubmitting}
-                        className="w-full py-3.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl font-bold text-sm transition-all disabled:opacity-50 flex items-center justify-center gap-2"
-                      >
-                        {isSubmitting ? 'Invio in corso...' : 'Invia Messaggio'}
-                      </button>
-                    </form>
-                  )}
-                </div>
-              </div>
-
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full py-3.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl font-bold text-sm transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+                  >
+                    {isSubmitting ? 'Invio in corso...' : 'Invia Messaggio'}
+                  </button>
+                </form>
+              )}
             </div>
           </div>
         </section>
