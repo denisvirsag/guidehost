@@ -45,7 +45,7 @@ export default function LoginPage() {
         onSubmit={(e) => {
           const formData = new FormData(e.currentTarget)
           const email = formData.get('email') as string
-          if (email) {
+          if (email && posthog) {
             posthog.identify(email, { email })
             posthog.capture('user_logged_in', { email })
           }

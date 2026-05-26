@@ -223,7 +223,7 @@ export default function SupportoPage() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="nome@esempio.it"
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-955 placeholder-slate-400 focus:border-slate-950 focus:ring-1 focus:ring-slate-950 outline-none text-sm transition-all"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-950 placeholder-slate-400 focus:border-slate-950 focus:ring-1 focus:ring-slate-950 outline-none text-sm transition-all"
                     />
                   </div>
 

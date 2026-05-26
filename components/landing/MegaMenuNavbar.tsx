@@ -4,11 +4,14 @@ import Link from 'next/link'
 import { Home, Menu, X, ArrowRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useState, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 
 export function MegaMenuNavbar() {
   const [hasScrolled, setHasScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const pathname = usePathname()
+  const isHome = pathname === '/'
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,7 +31,7 @@ export function MegaMenuNavbar() {
     <header
       className={cn(
         'fixed top-0 inset-x-0 z-50 transition-all duration-300',
-        hasScrolled
+        (hasScrolled || !isHome)
           ? 'bg-white/80 backdrop-blur-md border-b border-black/5 shadow-sm h-16'
           : 'bg-transparent h-20'
       )}
@@ -100,7 +103,7 @@ export function MegaMenuNavbar() {
                   key={item.href}
                   href={item.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="text-lg font-semibold text-slate-955 py-3 border-b border-slate-100/80"
+                  className="text-lg font-semibold text-slate-900 py-3 border-b border-slate-100/80"
                 >
                   {item.label}
                 </Link>

@@ -65,7 +65,7 @@ export default function SignupPage() {
           const formData = new FormData(e.currentTarget)
           const email = formData.get('email') as string
           const full_name = formData.get('full_name') as string
-          if (email) {
+          if (email && posthog) {
             posthog.identify(email, { email, name: full_name })
             posthog.capture('user_signed_up', { email, name: full_name })
           }
